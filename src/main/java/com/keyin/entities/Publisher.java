@@ -24,6 +24,7 @@ public class Publisher {
     @GeneratedValue(generator = "publisher_sequence")
     private Long id;
 
+//    @Column(unique = true)
     private String publisherName;
 
 
