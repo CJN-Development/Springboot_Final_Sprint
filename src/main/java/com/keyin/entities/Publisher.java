@@ -28,8 +28,8 @@ public class Publisher {
 
 
     // List to keep track of games from each publisher
-//    @OneToMany(mappedBy = "publisher")
-//    private List<Game> publisherGamesList;
+    //    @OneToMany(mappedBy = "publisher")
+    //    private List<Game> publisherGamesList;
 
 
     // wondering if I need the id if auto generated with the sequences in the repo
@@ -48,14 +48,10 @@ public class Publisher {
     public void setPublisherName(String publisherName) {
         this.publisherName = publisherName;
     }
-    public Publisher(String publisherName) {
-        this.publisherName = publisherName;
-    }
 
-//    public List<Game> getPublisherGamesList() {
-//        return publisherGamesList;
-//    }
-//
+
+
+
 //    public void setPublisherGamesList(List<Game> publisherGamesList) {
 //        this.publisherGamesList = publisherGamesList;
 //    }
