@@ -39,3 +39,4 @@ function createPlatform(platform) {
 // Loop through the platforms array and call createPlatform for each one
 for (let i = 0; i < platforms.length; i++) {
     createPlatform(platforms[i]);
+}
