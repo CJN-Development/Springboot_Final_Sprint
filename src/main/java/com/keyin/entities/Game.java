@@ -1,6 +1,7 @@
 package com.keyin.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,10 +19,10 @@ public class Game {
     private Publisher gamePublisher;
 //
     @OneToMany
-    private List<Platform> gamePlatform;
+    private List<Platform> gamePlatform = new ArrayList<>();
 
     @OneToMany
-    private List<Genre> listOfGenres;
+    private List<Genre> listOfGenres = new ArrayList<>();
 
     public Long getId() {
         return id;

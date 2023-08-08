@@ -1,6 +1,7 @@
 package com.keyin.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,13 +25,12 @@ public class Publisher {
     @GeneratedValue(generator = "publisher_sequence")
     private Long id;
 
-    @Column(unique = true)
     private String publisherName;
 
 
     //     List to keep track of games from each publisher
-    @OneToMany
-    private List<Game> publisherGamesList;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Game> publisherGamesList = new ArrayList<>();
 
 
     public Long getId() {
@@ -41,6 +41,7 @@ public class Publisher {
         this.id = id;
     }
 
+
     public String getPublisherName() {
         return publisherName;
     }
@@ -49,6 +50,9 @@ public class Publisher {
         this.publisherName = publisherName;
     }
 
+    public List<Game> getPublisherGamesList() {
+        return publisherGamesList;
+    }
 
     public void setPublisherGamesList(List<Game> publisherGamesList) {
         this.publisherGamesList = publisherGamesList;
@@ -59,7 +63,7 @@ public class Publisher {
         return "Publisher{" +
                 "id=" + id +
                 ", publisherName='" + publisherName + '\'' +
-                ", publisherGamesList=" + publisherGamesList +
+//                ", publisherGamesList=" + publisherGamesList +
                 '}';
     }
 }
