@@ -1,7 +1,11 @@
 package com.keyin.services;
 
 import com.keyin.dto.GameDTO;
+import com.keyin.dto.GenreDTO;
+import com.keyin.dto.PlatformDTO;
 import com.keyin.entities.Game;
+import com.keyin.entities.Genre;
+import com.keyin.entities.Platform;
 import com.keyin.entities.Publisher;
 import com.keyin.restrepos.GameRestRepository;
 import com.keyin.restrepos.GenreRestRepository;
@@ -10,7 +14,8 @@ import com.keyin.restrepos.PublisherRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class GameService {
@@ -29,23 +34,41 @@ public class GameService {
 
     public Game createGameWithAssociations(GameDTO request) {
         Game newGame = new Game();
-        newGame.setGameName(request.getGameName());
-        newGame.setGamePublisher(publisherRepository.findById(request.getGamePublisherId()));
+        newGame.setGameName(request.getName());
+        newGame.setReleaseDate(request.getReleaseDate());
 
-        Long publisherId = request.getGamePublisherId();
-        if (publisherId != null) {
-            Publisher publisher = publisherRepository.findById(publisherId)
-                    .orElseThrow(() -> new EntityNotFoundException("Publisher with ID " + publisherId + " not found"));
-            newGame.setGamePublisher(publisher);
+
+        Publisher publisher = new Publisher();
+        publisher.setPublisherName(request.getGamePublisher());
+        newGame.setGamePublisher(publisher);
+
+
+        List<GenreDTO> genreDTOs = request.getGenres();
+        List<Genre> genres = new ArrayList<>();
+        if (genreDTOs != null) {
+            for (GenreDTO genreDTO : genreDTOs) {
+                Genre genre = new Genre();
+                genre.setGenreName(genreDTO.getGenreName());
+                genres.add(genre);
+            }
+            newGame.setListOfGenres(genres);
         }
 
 
 
-        gameRepository.save(newGame);
+        List<PlatformDTO> platformDTOS = request.getPlatforms();
+        List<Platform> platforms = new ArrayList<>();
 
 
+        for (PlatformDTO platform : platformDTOS) {
+            Platform createdPlatform = new Platform();
+            createdPlatform.setPlatformName(platform.getPlatformName());
+            platforms.add(createdPlatform);
+        }
+        newGame.setGamePlatform(platforms);
 
-        return newGame;
+
+        return gameRepository.save(newGame);
     }
 
 //    public Game createGameWithAssociations(GameDTO request) {

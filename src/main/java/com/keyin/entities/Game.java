@@ -15,13 +15,19 @@ public class Game {
     private String gameName;
     private String releaseDate;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Publisher gamePublisher;
 //
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "game_platform",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "platform_name"))
     private List<Platform> gamePlatform = new ArrayList<>();
 
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "game_genre",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_name"))
     private List<Genre> listOfGenres = new ArrayList<>();
 
     public Long getId() {
