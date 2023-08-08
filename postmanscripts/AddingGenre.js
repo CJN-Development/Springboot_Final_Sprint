@@ -8,28 +8,21 @@ const genres = [
         "genreName": "Adventure"
     },
     {
-        "id": 1,
+        "id": 3,
         "genreName": "Action"
     },
     {
-        "id": 1,
+        "id": 4,
         "genreName": "Survival"
     },
     {
-        "id": 1,
+        "id": 5,
         "genreName": "Puzzle"
     },
     {
-        "id": 1,
+        "id": 6,
         "genreName": "Simulation"
-    },
-    {
-        "id": 1,
-        "genreName": "Strategy"
-    },
-
-
-
+    }
 ];
 
 // Function to send a POST request for a single genre
@@ -40,7 +33,7 @@ function createGenre(genre) {
         header: 'Content-Type:application/json',
         body: {
             mode: 'raw',
-            raw: JSON.stringify(genres)
+            raw: JSON.stringify(genre) // Send a single genre object
         }
     }, function (err, response) {
         if (err) {
@@ -51,7 +44,7 @@ function createGenre(genre) {
     });
 }
 
-// Loop through the genre array and call createGenre for each one
+// Loop through the genres array and call createGenre for each one
 for (let i = 0; i < genres.length; i++) {
     createGenre(genres[i]);
 }

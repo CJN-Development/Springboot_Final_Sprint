@@ -77,8 +77,8 @@ public class Game {
                 "id=" + id +
                 ", gameName='" + gameName + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
-//                ", gamePublisher=" + gamePublisher +
-//                ", gamePlatform=" + gamePlatform +
+                ", gamePublisher=" + gamePublisher +
+                ", gamePlatform=" + gamePlatform +
 //                ", gameGenre=" + gameGenre +
                 '}';
     }
