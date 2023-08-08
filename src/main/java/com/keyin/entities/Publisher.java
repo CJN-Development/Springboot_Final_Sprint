@@ -28,12 +28,11 @@ public class Publisher {
     private String publisherName;
 
 
-//     List to keep track of games from each publisher
-//    @OneToMany
-//    private List<Game> publisherGamesList;
+    //     List to keep track of games from each publisher
+    @OneToMany
+    private List<Game> publisherGamesList;
 
 
-    // wondering if I need the id if auto generated with the sequences in the repo
     public Long getId() {
         return id;
     }
@@ -51,18 +50,16 @@ public class Publisher {
     }
 
 
-
-
-//    public void setPublisherGamesList(List<Game> publisherGamesList) {
-//        this.publisherGamesList = publisherGamesList;
-//    }
+    public void setPublisherGamesList(List<Game> publisherGamesList) {
+        this.publisherGamesList = publisherGamesList;
+    }
 
     @Override
     public String toString() {
         return "Publisher{" +
                 "id=" + id +
                 ", publisherName='" + publisherName + '\'' +
-//                ", publisherGamesList=" + publisherGamesList +
+                ", publisherGamesList=" + publisherGamesList +
                 '}';
     }
 }
