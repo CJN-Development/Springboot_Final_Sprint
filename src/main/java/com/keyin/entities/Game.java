@@ -3,6 +3,7 @@ package com.keyin.entities;
 import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Game {
 
     @Id
@@ -13,14 +14,14 @@ public class Game {
     private String gameName;
     private String releaseDate;
 
-    @OneToOne(mappedBy = "Publisher")
-    private List<Publisher> gamePublisher;
-
-    @OneToMany(mappedBy = "Platform")
+    @OneToOne
+    private Publisher gamePublisher;
+//
+    @OneToMany
     private List<Platform> gamePlatform;
 
-    @OneToOne(mappedBy = "Genre")
-    private List<Genre> gameGenre;
+    @OneToMany
+    private List<Genre> listOfGenres;
 
     public Long getId() {
         return id;
@@ -46,11 +47,11 @@ public class Game {
         this.releaseDate = releaseDate;
     }
 
-    public List<Publisher> getGamePublisher() {
+    public Publisher getGamePublisher() {
         return gamePublisher;
     }
 
-    public void setGamePublisher(List<Publisher> gamePublisher) {
+    public void setGamePublisher(Publisher gamePublisher) {
         this.gamePublisher = gamePublisher;
     }
 
@@ -62,12 +63,12 @@ public class Game {
         this.gamePlatform = gamePlatform;
     }
 
-    public List<Genre> getGameGenre() {
-        return gameGenre;
+    public List<Genre> getListOfGenres() {
+        return listOfGenres;
     }
 
-    public void setGameGenre(List<Genre> gameGenre) {
-        this.gameGenre = gameGenre;
+    public void setListOfGenres(List<Genre> listOfGenres) {
+        this.listOfGenres = listOfGenres;
     }
 
     @Override
@@ -76,9 +77,9 @@ public class Game {
                 "id=" + id +
                 ", gameName='" + gameName + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
-                ", gamePublisher=" + gamePublisher +
-                ", gamePlatform=" + gamePlatform +
-                ", gameGenre=" + gameGenre +
+//                ", gamePublisher=" + gamePublisher +
+//                ", gamePlatform=" + gamePlatform +
+//                ", gameGenre=" + gameGenre +
                 '}';
     }
 }

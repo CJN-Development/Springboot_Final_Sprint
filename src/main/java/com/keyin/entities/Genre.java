@@ -1,9 +1,12 @@
 package com.keyin.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import java.util.List;
 
+@Entity
 public class Genre {
     @Id
     @SequenceGenerator(name = "genre_sequence", sequenceName = "genre_sequence", allocationSize = 1, initialValue=1)
@@ -11,7 +14,7 @@ public class Genre {
     private long id;
     private String genreName;
 
-    //private List<Game> listOfGamesByGenre;
+//    private List<Game> listOfGamesByGenre;
 
     public long getId() {
         return id;
@@ -28,6 +31,14 @@ public class Genre {
     public void setGenreName(String genreName) {
         this.genreName = genreName;
     }
+
+//    public List<Game> getListOfGamesByGenre() {
+//        return listOfGamesByGenre;
+//    }
+
+//    public void setListOfGamesByGenre(List<Game> listOfGamesByGenre) {
+//        this.listOfGamesByGenre = listOfGamesByGenre;
+//    }
 
     @Override
     public String toString() {

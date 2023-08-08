@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import java.util.List;
 
 @Entity
 public class Platform {
@@ -36,7 +37,7 @@ public class Platform {
 //    public List<Game> getListOfGamesOnPlatform() {
 //        return listOfGamesOnPlatform;
 //    }
-//
+
 //    public void setListOfGamesOnPlatform(List<Game> listOfGamesOnPlatform) {
 //        this.listOfGamesOnPlatform = listOfGamesOnPlatform;
 //    }
