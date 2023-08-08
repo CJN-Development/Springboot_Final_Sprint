@@ -24,13 +24,13 @@ public class Publisher {
     @GeneratedValue(generator = "publisher_sequence")
     private Long id;
 
-//    @Column(unique = true)
+    @Column(unique = true)
     private String publisherName;
 
 
-    // List to keep track of games from each publisher
-    //    @OneToMany(mappedBy = "publisher")
-    //    private List<Game> publisherGamesList;
+//     List to keep track of games from each publisher
+//    @OneToMany
+//    private List<Game> publisherGamesList;
 
 
     // wondering if I need the id if auto generated with the sequences in the repo
