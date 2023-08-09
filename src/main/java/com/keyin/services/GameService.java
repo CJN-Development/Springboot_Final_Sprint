@@ -56,22 +56,24 @@ public class GameService {
             publisher.setPublisherName(request.getGamePublisher());
             newGame.setGamePublisher(publisher);
 
+            createGenreAssociation(request,newGame);
 
 
-            if(request.getGenres() != null){
-                List<GenreDTO> genreDTOs = request.getGenres();
-                List<Genre> genres = new ArrayList<>();
 
-                for (GenreDTO genre : genreDTOs) {
-                    Genre createdGenre = new Genre();
-                    createdGenre.setGenreName(genre.getGenreName());
-                    genres.add(createdGenre);
-                }
-                newGame.setListOfGenres(genres);
-
-            } else{
-                throw new Error("Genre Is Null In The Request");
-            }
+//            if(request.getGenres() != null){
+//                List<GenreDTO> genreDTOs = request.getGenres();
+//                List<Genre> genres = new ArrayList<>();
+//
+//                for (GenreDTO genre : genreDTOs) {
+//                    Genre createdGenre = new Genre();
+//                    createdGenre.setGenreName(genre.getGenreName());
+//                    genres.add(createdGenre);
+//                }
+//                newGame.setListOfGenres(genres);
+//
+//            } else{
+//                throw new Error("Genre Is Null In The Request");
+//            }
 
 
             if(request.getPlatforms() != null){
@@ -100,6 +102,25 @@ public class GameService {
 
 
         return null;
+    }
+
+
+    public void createGenreAssociation(GameDTO request, Game game){
+        if(request.getGenres() != null){
+            List<GenreDTO> genreDTOs = request.getGenres();
+            List<Genre> genres = new ArrayList<>();
+
+            for (GenreDTO genre : genreDTOs) {
+                Genre createdGenre = new Genre();
+                createdGenre.setGenreName(genre.getGenreName());
+                genres.add(createdGenre);
+            }
+            game.setListOfGenres(genres);
+
+        } else{
+            throw new Error("Genre Is Null In The Request");
+        }
+
     }
 
 
