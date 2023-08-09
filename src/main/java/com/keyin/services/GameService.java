@@ -42,18 +42,17 @@ public class GameService {
         publisher.setPublisherName(request.getGamePublisher());
         newGame.setGamePublisher(publisher);
 
+        // TODO: Model after platform below
 
         List<GenreDTO> genreDTOs = request.getGenres();
         List<Genre> genres = new ArrayList<>();
-        if (genreDTOs != null) {
-            for (GenreDTO genreDTO : genreDTOs) {
-                Genre genre = new Genre();
-                genre.setGenreName(genreDTO.getGenreName());
-                genres.add(genre);
+
+            for (GenreDTO genre : genreDTOs) {
+                Genre createdGenre = new Genre();
+                createdGenre.setGenreName(genre.getGenreName());
+                genres.add(createdGenre);
             }
             newGame.setListOfGenres(genres);
-        }
-
 
 
         List<PlatformDTO> platformDTOS = request.getPlatforms();
