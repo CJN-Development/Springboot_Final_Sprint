@@ -10,9 +10,8 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "genre", path = "genre")
 public interface GenreRestRepository extends JpaRepository<Genre, Long> {
 
-    List<Genre> findByGenreName(String genreName);
+    Genre findByGenreName(String genreName);
 
     List<Genre> findByGenreNameIn(List<Genre> genreNames);
-
 
 }

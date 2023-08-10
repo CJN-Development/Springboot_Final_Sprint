@@ -1,7 +1,9 @@
 package com.keyin.controllers;
 
 import com.keyin.dto.GameDTO;
+import com.keyin.dto.GenreDTO;
 import com.keyin.entities.Game;
+import com.keyin.entities.Genre;
 import com.keyin.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,6 @@ public class GameController {
         Game createdGame = gameService.createGameWithAssociations(request);
         return ResponseEntity.ok(createdGame);
     }
-
 
 }
 

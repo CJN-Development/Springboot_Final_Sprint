@@ -12,6 +12,7 @@ public class Game {
     @GeneratedValue(generator = "games_sequence")
     private Long id;
 
+    @Column(unique = true)
     private String gameName;
     private String releaseDate;
 
