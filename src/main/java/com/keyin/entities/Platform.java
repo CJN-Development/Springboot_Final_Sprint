@@ -1,9 +1,7 @@
 package com.keyin.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +14,8 @@ public class Platform {
 
     private String platformName;
 
-//    private List<Game> listOfGamesOnPlatform;
+    @ManyToMany
+    private List<Game> listOfGamesOnPlatform = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -34,13 +33,13 @@ public class Platform {
         this.platformName = platformName;
     }
 
-//    public List<Game> getListOfGamesOnPlatform() {
-//        return listOfGamesOnPlatform;
-//    }
+    public List<Game> getListOfGamesOnPlatform() {
+        return listOfGamesOnPlatform;
+    }
 
-//    public void setListOfGamesOnPlatform(List<Game> listOfGamesOnPlatform) {
-//        this.listOfGamesOnPlatform = listOfGamesOnPlatform;
-//    }
+    public void setListOfGamesOnPlatform(List<Game> listOfGamesOnPlatform) {
+        this.listOfGamesOnPlatform = listOfGamesOnPlatform;
+    }
 
     @Override
     public String toString() {
