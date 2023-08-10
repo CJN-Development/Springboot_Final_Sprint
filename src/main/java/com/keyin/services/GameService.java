@@ -3,6 +3,9 @@ package com.keyin.services;
 import com.keyin.dto.GameDTO;
 import com.keyin.dto.GenreDTO;
 import com.keyin.dto.PlatformDTO;
+//import com.keyin.dto.PublisherDTO;
+//import com.keyin.dto.PublisherDTO;
+import com.keyin.dto.PublisherDTO;
 import com.keyin.entities.Game;
 import com.keyin.entities.Genre;
 import com.keyin.entities.Platform;
@@ -33,97 +36,82 @@ public class GameService {
     private PlatformRestRepository platformRepository;
 
     public Game createGameWithAssociations(GameDTO request) {
+        try {
 
-        try{
+            Game existingGame = gameRepository.findByGameName(request.getName());
+            if (existingGame != null) {
+                throw new IllegalArgumentException("A game with the same name already exists");
+            }
+
             Game newGame = new Game();
-            if(request.getName() != null){
+            if (request.getName() != null) {
                 newGame.setGameName(request.getName());
-
-
             } else {
                 throw new Error("Game Name Is Null In The Request");
             }
-
-            if(request.getReleaseDate() != null){
+            if (request.getReleaseDate() != null) {
                 newGame.setReleaseDate(request.getReleaseDate());
-
-
-            } else{
-                throw  new Error("Release Date Is Null In Request");
+            } else {
+                throw new Error("Release Date Is Null In Request");
             }
 
             Publisher publisher = new Publisher();
             publisher.setPublisherName(request.getGamePublisher());
             newGame.setGamePublisher(publisher);
 
-            createGenreAssociation(request,newGame);
+            setPlatforms(request, newGame);
 
+            setGenres(request, newGame);
 
-
-//            if(request.getGenres() != null){
-//                List<GenreDTO> genreDTOs = request.getGenres();
-//                List<Genre> genres = new ArrayList<>();
-//
-//                for (GenreDTO genre : genreDTOs) {
-//                    Genre createdGenre = new Genre();
-//                    createdGenre.setGenreName(genre.getGenreName());
-//                    genres.add(createdGenre);
-//                }
-//                newGame.setListOfGenres(genres);
-//
-//            } else{
-//                throw new Error("Genre Is Null In The Request");
-//            }
-
-
-            if(request.getPlatforms() != null){
-                List<PlatformDTO> platformDTOS = request.getPlatforms();
-                List<Platform> platforms = new ArrayList<>();
-
-
-                for (PlatformDTO platform : platformDTOS) {
-                    Platform createdPlatform = new Platform();
-                    createdPlatform.setPlatformName(platform.getPlatformName());
-                    platforms.add(createdPlatform);
-                }
-                newGame.setGamePlatform(platforms);
-
-
-            } else {
-                throw  new Error("Platform Is Null in The Request");
-            }
             return gameRepository.save(newGame);
-
-        } catch(Error e){
+        } catch (Error e) {
             System.out.println(e);
-
-
         }
-
-
         return null;
     }
 
+    public void setGenres(GameDTO request, Game game) {
+        if (request.getGenres() != null) {
+            List<GenreDTO> genreDTOS = request.getGenres();
+            List<Genre> genre = new ArrayList<>();
 
-    public void createGenreAssociation(GameDTO request, Game game){
-        if(request.getGenres() != null){
-            List<GenreDTO> genreDTOs = request.getGenres();
-            List<Genre> genres = new ArrayList<>();
-
-            for (GenreDTO genre : genreDTOs) {
-                Genre createdGenre = new Genre();
-                createdGenre.setGenreName(genre.getGenreName());
-                genres.add(createdGenre);
+            for (GenreDTO genres : genreDTOS) {
+                Genre existingGenre = genreRepository.findByGenreName(genres.getGenreName());
+                if (existingGenre == null) {
+                    existingGenre = new Genre();
+                    existingGenre.setGenreName(genres.getGenreName());
+                    genreRepository.save(existingGenre);
+                }
+                genre.add(existingGenre);
             }
-            game.setListOfGenres(genres);
 
-        } else{
-            throw new Error("Genre Is Null In The Request");
+            game.setListOfGenres(genre);
+        } else {
+            throw new IllegalArgumentException("Genres Are Null In The Request");
         }
 
     }
 
+    private void setPlatforms(GameDTO request, Game game) {
+        if (request.getPlatforms() != null) {
+            List<PlatformDTO> platformDTOS = request.getPlatforms();
+            List<Platform> platforms = new ArrayList<>();
 
+            for (PlatformDTO platform : platformDTOS) {
+                Platform existingPlatform = platformRepository.findByPlatformName(platform.getPlatformName());
+                if (existingPlatform == null) {
+                    existingPlatform = new Platform();
+                    existingPlatform.setPlatformName(platform.getPlatformName());
+                    platformRepository.save(existingPlatform);
+                }
+                platforms.add(existingPlatform);
+            }
+
+            game.setGamePlatform(platforms);
+        } else {
+            throw new IllegalArgumentException("Platforms Are Null In The Request");
+        }
+    }
 }
 
 
