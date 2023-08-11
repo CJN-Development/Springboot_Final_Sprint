@@ -55,9 +55,8 @@ public class GameService {
                 throw new Error("Release Date Is Null In Request");
             }
 
-            Publisher publisher = new Publisher();
-            publisher.setPublisherName(request.getGamePublisher());
-            newGame.setGamePublisher(publisher);
+
+            setPublisher(request, newGame);
 
             setPlatforms(request, newGame);
 
@@ -69,6 +68,25 @@ public class GameService {
         }
         return null;
     }
+
+    // helper method for publisher
+    private void setPublisher(GameDTO request, Game game) {
+        if (request.getGamePublisher() != null) {
+            String publisherName = request.getGamePublisher();
+            Publisher existingPublisher = publisherRepository.findByPublisherName(publisherName);
+
+            if (existingPublisher == null) {
+                existingPublisher = new Publisher();
+                existingPublisher.setPublisherName(publisherName);
+                publisherRepository.save(existingPublisher);
+            }
+
+            game.setGamePublisher(existingPublisher);
+        } else {
+            throw new IllegalArgumentException("Publisher Is Null In The Request");
+        }
+    }
+
 
     public void setGenres(GameDTO request, Game game) {
         if (request.getGenres() != null) {
