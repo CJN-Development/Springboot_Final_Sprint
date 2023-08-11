@@ -28,11 +28,6 @@ public class Publisher {
     private String publisherName;
 
 
-    //     List to keep track of games from each publisher
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Game> publisherGamesList = new ArrayList<>();
-
-
     public Long getId() {
         return id;
     }
@@ -50,20 +45,11 @@ public class Publisher {
         this.publisherName = publisherName;
     }
 
-    public List<Game> getPublisherGamesList() {
-        return publisherGamesList;
-    }
-
-    public void setPublisherGamesList(List<Game> publisherGamesList) {
-        this.publisherGamesList = publisherGamesList;
-    }
-
     @Override
     public String toString() {
         return "Publisher{" +
                 "id=" + id +
                 ", publisherName='" + publisherName + '\'' +
-//                ", publisherGamesList=" + publisherGamesList +
                 '}';
     }
 }

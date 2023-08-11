@@ -14,9 +14,6 @@ public class Platform {
 
     private String platformName;
 
-    @ManyToMany
-    private List<Game> listOfGamesOnPlatform = new ArrayList<>();
-
     public Long getId() {
         return id;
     }
@@ -33,20 +30,11 @@ public class Platform {
         this.platformName = platformName;
     }
 
-    public List<Game> getListOfGamesOnPlatform() {
-        return listOfGamesOnPlatform;
-    }
-
-    public void setListOfGamesOnPlatform(List<Game> listOfGamesOnPlatform) {
-        this.listOfGamesOnPlatform = listOfGamesOnPlatform;
-    }
-
     @Override
     public String toString() {
         return "Platform{" +
                 "id=" + id +
                 ", platformName='" + platformName + '\'' +
-//                ", listOfGamesOnPlatform=" + listOfGamesOnPlatform +
                 '}';
     }
 }
