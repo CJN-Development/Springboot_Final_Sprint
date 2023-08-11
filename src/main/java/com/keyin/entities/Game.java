@@ -1,5 +1,7 @@
 package com.keyin.entities;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
