@@ -1,11 +1,11 @@
 version: '3'
 services:
   myapp-main:
-    image: s4_final:latest
+    image: jkells/springapi2:latest
     ports:
       - 8080:8080
     environment:
-      - spring.datasource.url=jdbc:mysql://host.docker.internal:3306/s4_final
-      - spring.datasource.password=Nathan29
+      - spring.datasource.url=jdbc:mysql://host.docker.internal:3306/SPRING2FINAL
+      - spring.datasource.password=jordan1234
       - spring.datasource.username=root
       - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
