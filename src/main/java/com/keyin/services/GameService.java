@@ -10,10 +10,12 @@ import com.keyin.entities.Game;
 import com.keyin.entities.Genre;
 import com.keyin.entities.Platform;
 import com.keyin.entities.Publisher;
+import com.keyin.entities.ImageData;
 import com.keyin.restrepos.GameRestRepository;
 import com.keyin.restrepos.GenreRestRepository;
 import com.keyin.restrepos.PlatformRestRepository;
 import com.keyin.restrepos.PublisherRestRepository;
+import com.keyin.restrepos.ImageDataRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,9 @@ public class GameService {
 
     @Autowired
     private PlatformRestRepository platformRepository;
+
+    @Autowired
+    private ImageDataRestRepository imageDataRepository;
 
     public Game createGameWithAssociations(GameDTO request) {
         try {
@@ -59,6 +64,8 @@ public class GameService {
             } else {
                 throw new Error("Game Image Is Null In Request");
             }
+
+            setImageData(request, newGame);
 
             setPublisher(request, newGame);
 
@@ -134,7 +141,22 @@ public class GameService {
             throw new IllegalArgumentException("Platforms Are Null In The Request");
         }
     }
-    ;
+    private void setImageData(GameDTO request, Game game) {
+        if (request.getImageData() != null) {
+            String imageData = request.getImageData();
+            ImageData existingImage = imageDataRepository.findByImageData(imageData);
+
+            if (existingImage == null) {
+                existingImage = new ImageData();
+                existingImage.setImageData(imageData);
+                imageDataRepository.save(existingImage);
+            }
+
+            game.setImageData(String.valueOf(existingImage));
+        } else {
+            throw new IllegalArgumentException("Image Is Null In The Request");
+        }
+    }
 }
 
 

@@ -55,11 +55,11 @@ public class GameDTO {
         this.platforms = platforms;
     }
 
-    public byte[] getImageData() {
+    public String getImageData() {
         return imageData;
     }
 
-    public void setImageData(byte[] imageData) {
+    public static void setImageData(String imageData) {
         this.imageData = imageData;
     }
 }
