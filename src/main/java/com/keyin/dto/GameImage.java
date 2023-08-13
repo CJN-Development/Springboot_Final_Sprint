@@ -9,7 +9,7 @@ public class GameImage {
 
     private Long id;
 
-    private byte[] imageData;
+    private String imageData;
 
     @OneToOne(mappedBy = "image")
     private GameDTO gameDTO;

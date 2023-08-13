@@ -15,7 +15,7 @@ public class Game {
     @Column(unique = true)
     private String gameName;
     private String releaseDate;
-    private byte[] imageData;
+    private String imageData;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Publisher gamePublisher;
 //

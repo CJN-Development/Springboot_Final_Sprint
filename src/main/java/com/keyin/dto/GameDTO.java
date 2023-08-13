@@ -10,7 +10,7 @@ public class GameDTO {
     private String name;
     private String releaseDate;
 
-    private byte[] imageData;
+    private String imageData;
     private String gamePublisher;
     private List<GenreDTO> genres;
     private List<PlatformDTO> platforms;
