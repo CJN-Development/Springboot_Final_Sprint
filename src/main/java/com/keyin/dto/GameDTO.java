@@ -59,7 +59,7 @@ public class GameDTO {
         return imageData;
     }
 
-    public static void setImageData(String imageData) {
+    public void setImageData(String imageData) {
         this.imageData = imageData;
     }
 }
