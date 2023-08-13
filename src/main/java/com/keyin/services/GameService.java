@@ -54,7 +54,11 @@ public class GameService {
             } else {
                 throw new Error("Release Date Is Null In Request");
             }
-
+            if (request.getImageData() != null) {
+                newGame.setImageData(request.getImageData());
+            } else {
+                throw new Error("Game Image Is Null In Request");
+            }
 
             setPublisher(request, newGame);
 
@@ -130,6 +134,7 @@ public class GameService {
             throw new IllegalArgumentException("Platforms Are Null In The Request");
         }
     }
+
 }
 
 

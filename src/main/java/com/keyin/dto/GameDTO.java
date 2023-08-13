@@ -1,13 +1,16 @@
 package com.keyin.dto;
 
-import com.keyin.entities.Publisher;
-
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 public class GameDTO {
 
     private String name;
     private String releaseDate;
+
+    private String imageData;
     private String gamePublisher;
     private List<GenreDTO> genres;
     private List<PlatformDTO> platforms;
@@ -50,5 +53,13 @@ public class GameDTO {
 
     public void setPlatforms(List<PlatformDTO> platforms) {
         this.platforms = platforms;
+    }
+
+    public String getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(String imageData) {
+        this.imageData = imageData;
     }
 }

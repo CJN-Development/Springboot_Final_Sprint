@@ -15,7 +15,7 @@ public class Game {
     @Column(unique = true)
     private String gameName;
     private String releaseDate;
-
+    private String imageData;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Publisher gamePublisher;
 //
@@ -77,6 +77,14 @@ public class Game {
 
     public void setListOfGenres(List<Genre> listOfGenres) {
         this.listOfGenres = listOfGenres;
+    }
+
+    public String getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(String imageData) {
+        this.imageData = imageData;
     }
 
     @Override
